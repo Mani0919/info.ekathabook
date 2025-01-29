@@ -20,6 +20,7 @@ import customer2 from "./assets/customer2.jpg";
 import katha2 from "./assets/katha2.jpg";
 import katha1 from "./assets/katha1.jpg";
 import update from "./assets/update.jpg";
+import icon from "./assets/icon.png";
 const CustomModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
@@ -197,7 +198,7 @@ const App = () => {
           <nav className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img
-                src="/api/placeholder/48/48"
+                src={icon}
                 alt="App Icon"
                 className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl shadow-lg"
               />
