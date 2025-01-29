@@ -13,7 +13,13 @@ import {
   ChevronRight,
   ArrowUpRight,
 } from "lucide-react";
-
+import auth from "./assets/auth.png";
+import dashboard from "./assets/dashboard.png";
+import customer1 from "./assets/customer1.jpg";
+import customer2 from "./assets/customer2.jpg";
+import katha2 from "./assets/katha2.jpg";
+import katha1 from "./assets/katha1.jpg";
+import update from "./assets/update.jpg";
 const CustomModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
@@ -67,35 +73,37 @@ const App = () => {
       title: "Secure Authentication",
       description:
         "Ensures only authorized users can access the app with strong authentication mechanisms to protect sensitive data.",
-      image: "/api/placeholder/600/400",
+      image: auth,
     },
     {
       id: 2,
       title: "Dashboard Overview",
       description:
         "A comprehensive home screen displaying the shop owner's name, enterprise name, and photo. It also shows the total number of customers, frequent customers, and a notes section for important points.",
-      image: "/api/placeholder/600/400",
+      image: dashboard,
     },
     {
       id: 3,
       title: "Customer Management",
       description:
         "View all customers in one place. Easily update, delete, or add new customer details. Click on a customer to access their individual katha records.",
-      image: "/api/placeholder/600/400",
+      image: customer1,
+      image1: customer2,
     },
     {
       id: 4,
       title: "Katha Tracking",
       description:
         "Maintain detailed records of each customer's katha. Add, update, or delete katha entries to keep track of daily transactions and interactions.",
-      image: "/api/placeholder/600/400",
+      image: katha1,
+      image1: katha2,
     },
     {
       id: 5,
       title: "Owner Profile Management",
       description:
         "Update shop owner details like name, enterprise name, and photo through a convenient modal. Also includes a logout option for secure session management.",
-      image: "/api/placeholder/600/400",
+      image: update,
     },
     {
       id: 6,
@@ -303,7 +311,7 @@ const App = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature) => (
+            {features.map((feature, index) => (
               <div
                 key={feature.id}
                 className="group p-8 rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300"
@@ -315,13 +323,15 @@ const App = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
                 <p className="text-gray-600 mb-4">{feature.description}</p>
-                <button
-                  onClick={() => setSelectedFeature(feature)}
-                  className={`${theme.text} flex items-center hover:underline`}
-                >
-                  See more
-                  <ChevronRight className="ml-1 w-4 h-4" />
-                </button>
+                {features.length - 1 !== index && (
+                  <button
+                    onClick={() => setSelectedFeature(feature)}
+                    className={`${theme.text} flex items-center hover:underline`}
+                  >
+                    See more
+                    <ChevronRight className="ml-1 w-4 h-4" />
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -333,11 +343,24 @@ const App = () => {
       >
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">{selectedFeature?.title}</h2>
-          <img
-            src={selectedFeature?.image}
-            alt={selectedFeature?.title}
-            className="w-full rounded-lg shadow-lg"
-          />
+          <div className="flex flex-wrap justify-center gap-4">
+            {" "}
+            {/* Add gap and flex-wrap */}
+            {/* First Image */}
+            <img
+              src={selectedFeature?.image}
+              alt={selectedFeature?.title}
+              className="max-w-full rounded-lg shadow-lg object-contain" // Adjust image size and fit
+            />
+            {/* Second Image (if it exists) */}
+            {selectedFeature?.image1 && (
+              <img
+                src={selectedFeature?.image1}
+                alt={selectedFeature?.title}
+                className="max-w-full rounded-lg shadow-lg object-contain" // Adjust image size and fit
+              />
+            )}
+          </div>
           <p className="text-gray-600">{selectedFeature?.description}</p>
         </div>
       </CustomModal>
