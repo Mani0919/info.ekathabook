@@ -487,11 +487,11 @@ const App = () => {
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <div className="flex items-center justify-center space-x-4 mb-4">
             <img
-              src="/api/placeholder/32/32"
+              src={icon}
               alt="App Icon"
               className="w-8 h-8 rounded-lg"
             />
-            <span className="text-white font-semibold">Your App Name</span>
+            <span className="text-white font-semibold">E-kathaBook</span>
           </div>
           <p>
             © {new Date().getFullYear()} Your App Name. All rights reserved.
