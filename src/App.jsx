@@ -22,10 +22,12 @@ import katha1 from "./assets/katha1.jpg";
 import update from "./assets/update.jpg";
 import icon from "./assets/icon.png";
 import demoVideo from "./assets/demo.mp4";
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin } from "lucide-react";
+import { Play } from "lucide-react";
+import DemoSection from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialogbox";
 const CustomModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -46,6 +48,11 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("blue");
   const [selectedFeature, setSelectedFeature] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   // Theme configurations
   const themes = {
     blue: {
@@ -386,33 +393,69 @@ const App = () => {
       </Dialog> */}
 
       {/* Demo Section */}
-      <section id="demo" className={`py-20 ${theme.secondary}`}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              See It In Action
-            </h2>
-            <p className="text-xl text-gray-600">
-              Watch how our app can transform your workflow
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl">
-              <video
-                className="absolute inset-0 w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-              >
-                <source src={demoVideo} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+      {/* <DemoSection theme={{ secondary: "bg-gray-200" }} demoVideo={demoVideo} /> */}
+      <section className="py-16 px-4 bg-gray-50">
+      {/* Main Content */}
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">See It In Action</h2>
+        <p className="text-gray-600 text-lg md:text-xl mb-8">
+          Watch how our app can transform your workflow
+        </p>
+        <button
+          onClick={openModal}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors text-lg"
+        >
+          Watch Demo
+        </button>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg w-full overflow-hidden">
+            {/* Modal Container with responsive width */}
+            <div className="w-full max-w-[375px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] mx-auto">
+              {/* Modal Header */}
+              <div className="flex justify-between items-center p-4 border-b">
+                <h3 className="font-semibold text-lg md:text-xl">Demo Video</h3>
+                <button
+                  onClick={closeModal}
+                  className="text-gray-500 hover:text-gray-700 p-2"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Video Container with responsive aspect ratio */}
+              <div className="relative w-full">
+                <div className="aspect-[9/16] sm:aspect-video w-full bg-black">
+                  <video
+                    className="w-full h-full object-contain"
+                    controls
+                    playsInline
+                  >
+                    <source src={demoVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
+    </section>
 
       {/* Testimonials Section */}
       <section id="testimonials" className="py-20 bg-white">
