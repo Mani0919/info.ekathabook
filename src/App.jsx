@@ -21,6 +21,8 @@ import katha2 from "./assets/katha2.jpg";
 import katha1 from "./assets/katha1.jpg";
 import update from "./assets/update.jpg";
 import icon from "./assets/icon.png";
+import demoVideo from "./assets/demo.mp4";
+import { Github, Linkedin } from 'lucide-react';
 const CustomModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
@@ -395,10 +397,18 @@ const App = () => {
             </p>
           </div>
           <div className="max-w-4xl mx-auto">
-            <div className="aspect-w-16 aspect-h-9 bg-gray-100 rounded-xl overflow-hidden shadow-2xl">
-              <div className="flex items-center justify-center">
-                <Phone className="w-16 h-16 text-gray-400" />
-              </div>
+            <div className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl">
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+              >
+                <source src={demoVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
@@ -467,37 +477,36 @@ const App = () => {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-1">
-        {/* <div className="container mx-auto px-4"> */}
-        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {Object.entries(footerLinks).map(([category, links]) => (
-              <div key={category}>
-                <h3 className="text-white font-semibold mb-4 capitalize">{category}</h3>
-                <ul className="space-y-2">
-                  {links.map((link) => (
-                    <li key={link}>
-                      <a href="#" className="hover:text-white transition-colors">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div> */}
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <div className="flex items-center justify-center space-x-4 mb-4">
-            <img
-              src={icon}
-              alt="App Icon"
-              className="w-8 h-8 rounded-lg"
-            />
+            <img src={icon} alt="App Icon" className="w-8 h-8 rounded-lg" />
             <span className="text-white font-semibold">E-kathaBook</span>
           </div>
-          <p>
-            © {new Date().getFullYear()} Your App Name. All rights reserved.
+
+          {/* Social Links */}
+          <div className="flex justify-center space-x-6 mb-4">
+            <a
+              href="https://github.com/Mani0919"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors duration-200"
+            >
+              <Github size={24} />
+            </a>
+            <a
+              href="www.linkedin.com/in/manikanta-tangudu "
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors duration-200"
+            >
+              <Linkedin size={24} />
+            </a>
+          </div>
+
+          <p className="pb-8">
+            © {new Date().getFullYear()} E-kathaBook. All rights reserved.
           </p>
         </div>
-        {/* </div> */}
       </footer>
     </div>
   );
